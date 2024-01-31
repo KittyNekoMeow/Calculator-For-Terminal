@@ -1,28 +1,41 @@
 use std::io;
 
-fn calculate(x: f64, a:String, y: f64)-> f64 {
+fn calculate(x: f64, a:char, y: f64)-> f64 {
 
-    if a == "plus" {
-        x + y
-    }else if a == "minus"{
-        x - y
-    }else if a == "times"{
-        x * y
-    }else if a == "divide" {
-        x / y
-        
+    if a == '+' {
+        x+y
+    }else if a == '-'  {
+        x-y
+    }else if a == '*' {
+        x*y
+    }else if a == '/' {
+        x/y
     }else {
-        x
+        return x
     }
 
 }
 
+fn sym(s: &String)-> char {
+    
+    if s == "+" {
+      return '+'  
+    }else if s == "-" {
+        return '-'
+    }else if s == "*" {
+        return '*'
+    }else if s == "/" {
+        return '/'
+    }else {
+       return 'X'
+    }
 
+}
 
 fn main() {
 
    
-   println!("Type plus, minus, times, or divide inbetween numbers");
+   println!("Type +, -, *, or / inbetween numbers");
    
     let mut input1 = String::new();
 
@@ -34,16 +47,18 @@ fn main() {
 
     io::stdin().read_line(&mut input2).unwrap();
 
+    let b: String = input2.trim().parse().unwrap();
+   
+    let modi: char = sym(&b);
+
     io::stdin().read_line(&mut input3).unwrap();
 
     let num1: f64 = input1.trim().parse().unwrap();
-
-    let text1: String = input2.trim().parse().unwrap();
     
     let num2: f64 = input3.trim().parse().unwrap();
 
-    let c:f64 = calculate(num1, text1, num2);
-
+    let c:f64 = calculate(num1, modi, num2);
+   
     println!("The answer is: {}", c);
 
 }
