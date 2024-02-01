@@ -1,64 +1,60 @@
 use std::io;
 
-fn calculate(x: f64, a:char, y: f64)-> f64 {
-
-    if a == '+' {
-        x+y
-    }else if a == '-'  {
-        x-y
-    }else if a == '*' {
-        x*y
-    }else if a == '/' {
-        x/y
-    }else {
-        return x
+// Do the maths
+fn calculate(in1: f64, symbol: char, in2: f64) -> f64 {
+   
+    //  Checks for the correct symbol
+    match symbol {
+        '+' => in1+in2,
+        '-' => in1-in2,
+        '*' => in1*in2,
+        '/' => in1/in2,
+       
+       // Give arbitrary number so loop breaks
+        _ => 546343329.654352103,
     }
-
-}
-
-fn sym(s: &String)-> char {
-    
-    if s == "+" {
-      return '+'  
-    }else if s == "-" {
-        return '-'
-    }else if s == "*" {
-        return '*'
-    }else if s == "/" {
-        return '/'
-    }else {
-       return 'X'
-    }
-
 }
 
 fn main() {
+    loop {
+        
+    // Print instructions
+    println!("Type +, -, *, or / inbetween numbers");
 
-   
-   println!("Type +, -, *, or / inbetween numbers");
-   
     let mut input1 = String::new();
 
     let mut input2 = String::new();
 
     let mut input3 = String::new();
 
+    // Takes input
     io::stdin().read_line(&mut input1).unwrap();
 
     io::stdin().read_line(&mut input2).unwrap();
 
-    let b: String = input2.trim().parse().unwrap();
-   
-    let modi: char = sym(&b);
-
     io::stdin().read_line(&mut input3).unwrap();
 
+    // Convert input
     let num1: f64 = input1.trim().parse().unwrap();
-    
-    let num2: f64 = input3.trim().parse().unwrap();
 
-    let c:f64 = calculate(num1, modi, num2);
+    let text: char = input2.trim().parse().unwrap();
+
+    let num2: f64 = input3.trim().parse().unwrap();
    
-    println!("The answer is: {}", c);
+    // Calls for calculation
+    let answer = calculate(num1, text, num2);
+
+    // Checks if you didn't input a modifier
+    if answer == 546343329.654352103 {
+        println!("Use the correct symbol next time");
+        
+        // Cancels loop if didn't
+        break
+    }
+
+    // Prints answer
+    println!("The answer is: {}", answer);
+    
+    }
 
 }
