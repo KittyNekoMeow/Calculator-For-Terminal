@@ -1,18 +1,17 @@
-use core::f64;
 use std::io;
 
 // Do the maths
-fn calculate(in1: f64, symbol: char, in2: f64) -> String {
+fn calculate(in1: f64, symbol: char, in2: f64) -> f64 {
    
     //  Checks for the correct symbol
     match symbol {
-        '+' => (in1+in2).to_string(),
-        '-' => (in1-in2).to_string(),
-        '*' => (in1*in2).to_string(),
-        '/' => (in1/in2).to_string(),
+        '+' => in1+in2,
+        '-' => in1-in2,
+        '*' => in1*in2,
+        '/' => in1/in2,
        
        // Give arbitrary number so loop breaks
-        _ => (546343329.654352103).to_string(),
+        _ => 546343329.654352103,
     }
 }
 
@@ -46,7 +45,7 @@ fn main() {
     let answer = calculate(num1, text, num2);
 
     // Checks if you didn't input a modifier
-    if answer == (546343329.654352103).to_string() {
+    if answer == 546343329.654352103 {
         println!("Use the correct symbol next time");
         
         // Cancels loop if didn't
