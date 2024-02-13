@@ -35,11 +35,11 @@ fn main() {
     io::stdin().read_line(&mut input3).unwrap();
 
     // Convert input
-    let num1: f64 = input1.trim().parse().unwrap();
+    let num1 = input1.trim().parse().unwrap();
 
     let text: char = input2.trim().parse().unwrap();
 
-    let num2: f64 = input3.trim().parse().unwrap();
+    let num2 = input3.trim().parse().unwrap();
 
     // Calls for calculation
     let answer = calculate(num1, text, num2);

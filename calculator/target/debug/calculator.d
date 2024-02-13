@@ -1,1 +1,1 @@
-/home/eli123lb/Calculator-For-Terminal/calculator/target/debug/calculator: /home/eli123lb/Calculator-For-Terminal/calculator/src/main.rs
+/home/eli123lb/Projects/calculator-for-terminal/calculator/target/debug/calculator: /home/eli123lb/Projects/calculator-for-terminal/calculator/src/main.rs
