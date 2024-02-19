@@ -1,4 +1,5 @@
 use std::io;
+use std::fmt::Error;
 
 // Do the maths
 fn calculate(in1: f64, symbol: char, in2: f64) -> f64 {
@@ -15,11 +16,21 @@ fn calculate(in1: f64, symbol: char, in2: f64) -> f64 {
     }
 }
 
+// Checks if input is a float
+fn check(number: &str) -> Result<f64, Error> {
+    match number.parse::<f64>() {
+        Ok(i) => Ok(i),
+        Err(_) => Err(Error)
+    }
+}
+
 fn main() {
+   
     loop {
         
     // Print instructions
     println!("Type +, -, *, or / inbetween numbers");
+    println!("Do not input a number to exit program");
 
     let mut input1 = String::new();
 
@@ -35,11 +46,23 @@ fn main() {
     io::stdin().read_line(&mut input3).unwrap();
 
     // Convert input
-    let num1 = input1.trim().parse().unwrap();
+    let num1 = input1.trim();
 
-    let text: char = input2.trim().parse().unwrap();
+    let text = input2.trim().parse().unwrap();
 
-    let num2 = input3.trim().parse().unwrap();
+    let num2 = input3.trim();
+
+    // If variable isn't a float break the loop
+    let num1 = match check(num1) {
+        Ok(i) => i,
+        Err(_) => {println!("Did not input number"); return}
+    };
+
+    // Same as first
+    let num2 = match check(num2) {
+        Ok(i) => i,
+        Err(_) => {println!("Did not input number"); return}
+    };
 
     // Calls for calculation
     let answer = calculate(num1, text, num2);
@@ -49,12 +72,12 @@ fn main() {
         println!("Use the correct symbol next time");
         
         // Cancels loop if didn't
-        break
+        return
     }
 
     // Prints answer
     println!("The answer is: {}", answer);
     
-    }
+ }
 
 }
