@@ -2,17 +2,17 @@ use std::io;
 use std::fmt::Error;
 
 // Do the maths
-fn calculate(in1: f64, symbol: char, in2: f64) -> f64 {
+fn calculate(in1: f64, symbol: Option<char>, in2: f64) -> f64 {
    
     //  Checks for the correct symbol
     match symbol {
-        '+' => in1+in2,
-        '-' => in1-in2,
-        '*' => in1*in2,
-        '/' => in1/in2,
+        Some('+') => in1+in2,
+        Some('-') => in1-in2,
+        Some('*') => in1*in2,
+        Some('/') => in1/in2,
        
        // Give arbitrary number so loop breaks
-        _ => 546343329.654352103,
+        _ => 546343329.654352103
     }
 }
 
@@ -30,7 +30,6 @@ fn main() {
         
     // Print instructions
     println!("Type +, -, *, or / inbetween numbers");
-    println!("Do not input a number to exit program");
 
     let mut input1 = String::new();
 
@@ -48,9 +47,12 @@ fn main() {
     // Convert input
     let num1 = input1.trim();
 
-    let text = input2.trim().parse().unwrap();
+    // Chatches unwrap err of to many chars
+    let text: String = input2.trim().parse().unwrap();
 
     let num2 = input3.trim();
+    
+    let text_char = text.chars().next();
 
     // If variable isn't a float break the loop
     let num1 = match check(num1) {
@@ -65,7 +67,7 @@ fn main() {
     };
 
     // Calls for calculation
-    let answer = calculate(num1, text, num2);
+    let answer = calculate(num1, text_char, num2);
 
     // Checks if you didn't input a modifier
     if answer == 546343329.654352103 {
@@ -77,7 +79,21 @@ fn main() {
 
     // Prints answer
     println!("The answer is: {}", answer);
-    
+
+    println!("To exit program enter q, to continue press any other key");
+
+    // Takes new input
+    let mut input4 = String::new();
+
+    io::stdin().read_line(&mut input4).unwrap();
+
+    let exit_code: String = input4.trim().parse().unwrap();
+   
+    // If input is "q" break the loop
+    if exit_code == "q" {
+        return
+    }
+
  }
 
 }
